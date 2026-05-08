@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* prevents scrollbars */
+}
+
+#game {
+  width: 100vw;
+  height: 100vh;
+  border: 0px solid black;
+  image-rendering: pixelated; /* makes sprites crisp */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  object-fit: cover; /* THIS is the magic */
+  image-rendering: pixelated;
+}
+
