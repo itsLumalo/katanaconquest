@@ -1,3 +1,4 @@
+/*
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
@@ -21,3 +22,4 @@ function tick() {
 window.onload = function() {
     setInterval(tick, 100);
 };
+*/
