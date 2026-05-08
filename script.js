@@ -9,6 +9,7 @@ const samuriAttackSS = new Image();
 const samuriAttackShadowSS = new Image();
 const skeletonIdleSS = new Image();
 const skeletonIdleShadowSS = new Image();
+
 background1.src = "assets/backgrounds/origbig.png";
 samuriIdleSS.src = "assets/samuri/IDLE.png";
 samuriIdleShadowSS.src = "assets/samuri/IDLESHADOW.png";
@@ -16,12 +17,13 @@ samuriAttackSS.src = "assets/samuri/ATTACK 1.png";
 samuriAttackShadowSS.src = "assets/samuri/ATTACK 1SHADOW.png";
 skeletonIdleSS.src = "assets/skeleton/Idle.png";
 skeletonIdleShadowSS.src = "assets/skeleton/IdleShadow.png";
+
 let currentAnimation = "idle";
 let currentEnemie = "skeleton";
 
 let frame = 0;
 let enemieFrame = 0;
-let frameWidth = 96; // width of each frame
+let frameWidth = 96;
 let enemieFrameWidth = 150;
 
 canvas.addEventListener("click", function () {
@@ -39,72 +41,79 @@ function tick() {
     -100,
     -80,
     background1.width * spriteScale,
-    background1.height * spriteScale,
+    background1.height * spriteScale
   );
 
+  // SAMURAI IDLE
   if (currentAnimation == "idle") {
     ctx.save();
     ctx.globalAlpha = 0.4;
     ctx.drawImage(
       samuriIdleShadowSS,
       frame * frameWidth,
-      0, // source X moves each frame
+      0,
       frameWidth,
       samuriIdleSS.height,
-      canvas.width / 2 - 96 / 2 - 30,
+      canvas.width / 2 - 96 / 2 - 30 + 5,   // +5 RIGHT
       canvas.height / 2 - 35 + 54,
       frameWidth,
-      (samuriIdleSS.height * 1) / 3,
+      (samuriIdleSS.height * 1) / 3
     );
     ctx.restore();
+
     ctx.drawImage(
       samuriIdleSS,
       frame * frameWidth,
-      0, // source X moves each frame
+      0,
       frameWidth,
       samuriIdleSS.height,
-      canvas.width / 2 - 96 / 2 - 30,
+      canvas.width / 2 - 96 / 2 - 30 + 5,   // +5 RIGHT
       canvas.height / 2 - 35,
       frameWidth,
-      samuriIdleSS.height,
+      samuriIdleSS.height
     );
-    if (frame >= 9) {
-      frame = 0;
-    }
-  } else if (currentAnimation == "attack") {
+
+    if (frame >= 9) frame = 0;
+  }
+
+  // SAMURAI ATTACK
+  else if (currentAnimation == "attack") {
     ctx.save();
     ctx.globalAlpha = 0.4;
     ctx.drawImage(
       samuriAttackShadowSS,
       frame * frameWidth,
-      0, // source X moves each frame
+      0,
       frameWidth,
       samuriAttackSS.height,
-      canvas.width / 2 - 96 / 2 - 40,
+      canvas.width / 2 - 96 / 2 - 40 + 5,   // +5 RIGHT
       canvas.height / 2 - 35 + 54,
       frameWidth,
-      (samuriAttackSS.height * 1) / 3,
+      (samuriAttackSS.height * 1) / 3
     );
     ctx.restore();
+
     ctx.drawImage(
       samuriAttackSS,
       frame * frameWidth,
-      0, // source X moves each frame
+      0,
       frameWidth,
       samuriAttackSS.height,
-      canvas.width / 2 - 96 / 2 - 40,
+      canvas.width / 2 - 96 / 2 - 40 + 5,   // +5 RIGHT
       canvas.height / 2 - 35,
       frameWidth,
-      samuriAttackSS.height,
+      samuriAttackSS.height
     );
+
     if (frame >= 6) {
       frame = 0;
       currentAnimation = "idle";
     }
   }
 
+  // ENEMY (unchanged)
   if (currentEnemie == "skeleton") {
-    ctx.save(); // save canvas state
+    ctx.save();
     ctx.globalAlpha = 0.4;
     ctx.scale(-1, 1);
     ctx.drawImage(
@@ -116,10 +125,11 @@ function tick() {
       -(canvas.width / 2 - 96 / 2) - 150,
       canvas.height / 2 - 53 + 66,
       enemieFrameWidth,
-      (skeletonIdleSS.height * 1) / 3,
+      (skeletonIdleSS.height * 1) / 3
     );
     ctx.restore();
-    ctx.save(); // save canvas state
+
+    ctx.save();
     ctx.scale(-1, 1);
     ctx.drawImage(
       skeletonIdleSS,
@@ -130,21 +140,20 @@ function tick() {
       -(canvas.width / 2 - 96 / 2) - 150,
       canvas.height / 2 - 53,
       enemieFrameWidth,
-      skeletonIdleSS.height,
+      skeletonIdleSS.height
     );
     ctx.restore();
-    if (enemieFrame >= 3) {
-      enemieFrame = 0;
-    }
+
+    if (enemieFrame >= 3) enemieFrame = 0;
   }
+
   frame++;
   enemieFrame++;
 }
 
-function startGame(){
+function startGame() {
   setInterval(() => {
     tick();
   }, 100);
-};
-
+}
 startGame();
