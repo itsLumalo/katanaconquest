@@ -146,3 +146,5 @@ function startGame(){
     tick();
   }, 100);
 };
+
+startGame();
